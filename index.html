@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMAPT-KR Pilot v1.0 Final</title>
+<style>
+:root{--blue:#174ea6;--blue2:#0b3b86;--bg:#eef3f9;--text:#1f2937;--muted:#64748b;--line:#d9e2ef;--card:#fff;--danger:#b91c1c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans SC","Apple SD Gothic Neo",sans-serif}
+.app{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.card{width:min(860px,100%);background:var(--card);border-radius:18px;padding:34px;box-shadow:0 8px 28px rgba(15,23,42,.10)}
+.hidden{display:none!important}
+h1{color:var(--blue);margin:0 0 10px;text-align:center;font-size:34px}
+h2{color:var(--blue);margin:0 0 20px}
+.subtitle{text-align:center;color:var(--muted);line-height:1.6;margin-bottom:28px}
+.section-head{display:flex;justify-content:space-between;gap:16px;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:22px}
+.badge{background:#edf4ff;color:var(--blue);padding:7px 12px;border-radius:999px;font-weight:700;white-space:nowrap}
+.notice{background:#f8fbff;border:1px solid var(--line);border-radius:14px;padding:18px;line-height:1.8}
+label{display:block;margin:10px 0;line-height:1.5}
+input[type="text"],select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:16px;margin-top:6px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+button{border:0;border-radius:12px;padding:12px 24px;font-size:16px;cursor:pointer;background:var(--blue);color:#fff;font-weight:700}
+button:hover{background:var(--blue2)}
+button.secondary{background:#e8eef8;color:var(--blue)}
+button.secondary:hover{background:#dbe7fa}
+.btn-row{display:flex;justify-content:space-between;gap:12px;margin-top:28px}
+.center{text-align:center}
+.audio-btn{width:220px;margin:14px auto;display:block;font-size:18px;padding:14px 26px}
+.prompt{text-align:center;font-size:18px;line-height:1.8;margin:24px 0 18px}
+.choice{display:block;width:100%;border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin:14px 0;font-size:22px;background:#fff}
+.choice:hover{border-color:var(--blue);background:#f8fbff}
+.choice input{transform:scale(1.15);margin-right:10px}
+.warn{color:var(--danger);font-size:14px;margin-top:8px}
+.small{font-size:14px;color:var(--muted)}
+.progressbar{height:8px;background:#e5edf7;border-radius:999px;overflow:hidden;margin:18px 0 4px}
+.progressbar>div{height:100%;background:var(--blue);width:0%}
+.footer-note{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
+textarea{width:100%;min-height:92px;padding:12px;border:1px solid var(--line);border-radius:10px;font-size:15px}
+.result-box{background:#0f172a;color:#dbeafe;padding:14px;border-radius:12px;white-space:pre-wrap;max-height:280px;overflow:auto;font-size:12px}
+@media(max-width:700px){.app{padding:12px;align-items:flex-start}.card{padding:22px;border-radius:14px}.grid{grid-template-columns:1fr}h1{font-size:28px}.section-head{flex-direction:column;align-items:flex-start}.btn-row{flex-direction:column}button{width:100%}.audio-btn{width:100%}}
+</style>
+</head>
+<body>
+<div class="app"><main class="card">
+<section id="page-consent">
+<h1>CMAPT-KR</h1>
+<div class="subtitle"><b>Chinese Mandarin Auditory Perception Test</b><br>韩国汉语学习者汉语语音听辨能力测试<br>한국인 중국어 학습자의 중국어 음성 변별 능력 검사</div>
+<div class="notice">欢迎参加本研究。本研究旨在了解韩国汉语学习者的汉语语音听辨情况。本问卷仅用于学术研究，所有数据匿名处理。请在安静环境下佩戴耳机完成测试，测试时间约 8—10 分钟。<br><br>본 연구는 한국인 중국어 학습자의 중국어 음성 변별 능력을 알아보기 위한 연구입니다. 수집된 자료는 학술 연구 목적으로만 사용되며, 모든 응답은 익명으로 처리됩니다. 정확한 결과를 위해 조용한 환경에서 이어폰 또는 헤드폰을 착용한 후 테스트를 진행해 주시기 바랍니다.</div>
+<label><input type="checkbox" id="agree"> 我已阅读并同意参加本研究。 / 연구 참여에 동의합니다.</label>
+<div class="center"><button onclick="startConsent()">开始测试 / 시작하기</button></div>
+<div class="footer-note">CMAPT-KR Pilot v1.0 Final · Pilot Version</div>
+</section>
+
+<section id="page-bg" class="hidden">
+<div class="section-head"><h2>第一部分：背景调查<br><small>배경 정보</small></h2><span class="badge">Step 1 / 4</span></div>
+<div class="grid">
+<label>性别 / 성별<select id="gender"><option value="">请选择 / 선택하세요</option><option>男 / 남</option><option>女 / 여</option></select></label>
+<label>年龄 / 연령<select id="age"><option value="">请选择 / 선택하세요</option><option>18岁以下 / 18세 이하</option><option>18–24岁 / 18–24세</option><option>25–30岁 / 25–30세</option><option>31–40岁 / 31–40세</option><option>41–50岁 / 41–50세</option><option>51岁及以上 / 51세 이상</option></select></label>
+<label>学习汉语多久了？ / 중국어 학습 기간<select id="study_time"><option value="">请选择 / 선택하세요</option><option>0–6个月 / 0–6개월</option><option>7–12个月 / 7–12개월</option><option>1–2年 / 1–2년</option><option>2–4年 / 2–4년</option><option>4年以上 / 4년 이상</option></select></label>
+<label>目前汉语水平 / 현재 중국어 수준<input type="text" id="hsk" placeholder="如 HSK4；未参加请填 无"></label>
+<label>是否来过中国 / 중국 방문 경험<select id="visited_china"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
+<label>累计在中国停留时间 / 중국 총 체류 기간<select id="stay_china"><option value="">请选择 / 선택하세요</option><option>少于1个月 / 1개월 미만</option><option>1–6个月 / 1–6개월</option><option>6–12个月 / 6–12개월</option><option>1–2年 / 1–2년</option><option>2–4年 / 2–4년</option><option>4年以上 / 4년 이상</option><option>未去过中国 / 중국 방문 경험 없음</option></select></label>
+<label>汉语教师主要是哪国人？ / 중국어 선생님<select id="teacher"><option value="">请选择 / 선택하세요</option><option>中国人 / 중국인</option><option>韩国人 / 한국인</option><option>两者都有 / 둘 다 있음</option></select></label>
+<label>是否接受过声调和拼音训练？ / 발음 교육 경험<select id="training"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
+<label>平均每周使用汉语时间 / 주당 중국어 사용 시간<select id="weekly_use"><option value="">请选择 / 선택하세요</option><option>少于5小时 / 5시간 미만</option><option>5–10小时 / 5–10시간</option><option>10–20小时 / 10–20시간</option><option>20小时以上 / 20시간 이상</option></select></label>
+</div>
+<div class="btn-row"><button class="secondary" onclick="showPage('page-consent')">返回</button><button onclick="goPractice()">下一步</button></div>
+</section>
+
+<section id="page-practice" class="hidden">
+<div class="section-head"><h2>声音测试<br><small>음성 테스트</small></h2><span class="badge">Step 2 / 4</span></div>
+<p class="prompt">请先播放测试音频，确认可以正常听见。<br><small>테스트 음성을 재생하여 소리가 잘 들리는지 확인해 주세요.</small></p>
+<button class="audio-btn" onclick="playPractice()">▶ 播放试听 / 재생</button>
+<audio id="practiceAudio" src="audio/10.mp3"></audio>
+<p class="small center">试听音频文件名：audio/10.mp3</p>
+<div class="btn-row"><button class="secondary" onclick="showPage('page-bg')">返回</button><button onclick="beginTest()">进入正式测试</button></div>
+</section>
+
+<section id="page-test" class="hidden">
+<div class="section-head"><h2>第二部分：听辨测试<br><small>음성 변별 테스트</small></h2><span class="badge" id="progressText"></span></div>
+<div class="progressbar"><div id="bar"></div></div>
+<h2 id="questionTitle" class="center"></h2>
+<button class="audio-btn" id="playBtn" onclick="playCurrent()">▶ 播放音频</button>
+<audio id="mainAudio"></audio>
+<div class="center small" id="playInfo">播放次数：0</div>
+<div class="prompt">请选择您听到的拼音。<br><small>음성을 듣고 맞는 병음을 선택하십시오.</small></div>
+<div id="optionsBox"></div>
+<div id="warn" class="warn"></div>
+<div class="btn-row"><button class="secondary" onclick="prevQuestion()">上一题</button><button onclick="nextQuestion()">下一题</button></div>
+</section>
+
+<section id="page-survey" class="hidden">
+<div class="section-head"><h2>第三部分：测试反馈<br><small>테스트 피드백</small></h2><span class="badge">Step 4 / 4</span></div>
+<p><b>1. 您觉得本研究整体难度如何？</b><br><small>본 연구의 전체적인 난이도는 어떠하다고 생각하시나요?</small></p>
+<label class="choice"><input type="radio" name="overall" value="1">1 非常困难 / 매우 어렵다</label>
+<label class="choice"><input type="radio" name="overall" value="2">2 困难 / 어렵다</label>
+<label class="choice"><input type="radio" name="overall" value="3">3 有点困难 / 약간 어렵다</label>
+<label class="choice"><input type="radio" name="overall" value="4">4 一般 / 보통이다</label>
+<label class="choice"><input type="radio" name="overall" value="5">5 有点容易 / 약간 쉽다</label>
+<label class="choice"><input type="radio" name="overall" value="6">6 容易 / 쉽다</label>
+<label class="choice"><input type="radio" name="overall" value="7">7 非常容易 / 매우 쉽다</label>
+
+<p><b>2. 您觉得最难区分的是？</b><br><small>가장 구별하기 어려웠던 것은 무엇인가요?</small></p>
+<label class="choice"><input type="radio" name="hardest" value="tone">声调 / 성조</label>
+<label class="choice"><input type="radio" name="hardest" value="initial">声母 / 성모</label>
+<label class="choice"><input type="radio" name="hardest" value="final">韵母 / 운모</label>
+<p><b>3. 您做题时是否依靠猜测？</b><br><small>문제를 풀 때 추측에 의존하셨나요?</small></p>
+<label class="choice"><input type="radio" name="guess" value="never">从不 / 전혀 그렇지 않았다</label>
+<label class="choice"><input type="radio" name="guess" value="sometimes">偶尔 / 가끔</label>
+<label class="choice"><input type="radio" name="guess" value="often">经常 / 자주</label>
+<label class="choice"><input type="radio" name="guess" value="mostly">大多数题都在猜 / 대부분 추측했다</label>
+<p><b>4. 您认为题目说明是否清晰？</b><br><small>문항 설명이 명확했다고 생각하시나요?</small></p>
+<label class="choice"><input type="radio" name="clarity" value="very clear">非常清晰 / 매우 그렇다</label>
+<label class="choice"><input type="radio" name="clarity" value="clear">比较清晰 / 비교적 그렇다</label>
+<label class="choice"><input type="radio" name="clarity" value="normal">一般 / 보통이다</label>
+<label class="choice"><input type="radio" name="clarity" value="unclear">不清晰 / 그렇지 않다</label>
+<p><b>5. 是否愿意配合5-10分钟访谈？</b><br><small>5~10분 인터뷰에 참여해 주실 수 있으신가요?</small></p>
+<label class="choice"><input type="radio" name="interview" value="yes">是 / 네</label>
+<label class="choice"><input type="radio" name="interview" value="no">否 / 아니요</label>
+<label>联系方式与方便访谈时间 / 연락처 및 가능한 시간<textarea id="contact" placeholder="KakaoTalk / WeChat / Instagram / Email"></textarea></label>
+<div class="btn-row"><button class="secondary" onclick="showPage('page-test')">返回</button><button onclick="finish()">提交</button></div>
+</section>
+
+<section id="page-finish" class="hidden">
+<h2 class="center">感谢您的参与！<br><small>참여해 주셔서 감사합니다.</small></h2>
+<p class="center">您已完成全部测试。请点击下面按钮下载测试数据（CSV），并将 CSV 文件发送给研究者。</p>
+<p class="center"><small>테스트가 완료되었습니다. 아래 버튼을 눌러 CSV 파일을 다운로드한 후 연구자에게 보내주시기 바랍니다.</small></p>
+<div class="center"><button onclick="downloadCSV()">下载测试数据 CSV</button></div>
+<p class="small center">CMAPT-KR Pilot v1.0 Final · Stable Pilot Version</p>
+<h3>数据预览</h3>
+<pre class="result-box" id="preview"></pre>
+</section>
+
+</main></div>
+<script>
+const QUESTIONS = [
+  {
+    "id": 11,
+    "module": "tone",
+    "subtype": "T1-T2 阴平-阳平",
+    "audio": "audio/11.mp3",
+    "options": [
+      "mā",
+      "má"
+    ]
+  },
+  {
+    "id": 12,
+    "module": "tone",
+    "subtype": "T3-T1 上声-阴平",
+    "audio": "audio/12.mp3",
+    "options": [
+      "mǎ",
+      "mā"
+    ]
+  },
+  {
+    "id": 13,
+    "module": "tone",
+    "subtype": "T1-T4 阴平-去声",
+    "audio": "audio/13.mp3",
+    "options": [
+      "mā",
+      "mà"
+    ]
+  },
+  {
+    "id": 14,
+    "module": "tone",
+    "subtype": "T2-T3 阳平-上声",
+    "audio": "audio/14.mp3",
+    "options": [
+      "má",
+      "mǎ"
+    ]
+  },
+  {
+    "id": 15,
+    "module": "tone",
+    "subtype": "T2-T4 阳平-去声",
+    "audio": "audio/15.mp3",
+    "options": [
+      "má",
+      "mà"
+    ]
+  },
+  {
+    "id": 16,
+    "module": "tone",
+    "subtype": "T3-T4 上声-去声",
+    "audio": "audio/16.mp3",
+    "options": [
+      "mǎ",
+      "mà"
+    ]
+  },
+  {
+    "id": 17,
+    "module": "initial",
+    "subtype": "aspiration b-p",
+    "audio": "audio/17.mp3",
+    "options": [
+      "bā",
+      "pā"
+    ]
+  },
+  {
+    "id": 18,
+    "module": "initial",
+    "subtype": "aspiration d-t",
+    "audio": "audio/18.mp3",
+    "options": [
+      "tā",
+      "dā"
+    ]
+  },
+  {
+    "id": 19,
+    "module": "initial",
+    "subtype": "aspiration g-k",
+    "audio": "audio/19.mp3",
+    "options": [
+      "gā",
+      "kā"
+    ]
+  },
+  {
+    "id": 20,
+    "module": "initial",
+    "subtype": "aspiration j-q",
+    "audio": "audio/20.mp3",
+    "options": [
+      "jī",
+      "qī"
+    ]
+  },
+  {
+    "id": 21,
+    "module": "initial",
+    "subtype": "aspiration z-c",
+    "audio": "audio/21.mp3",
+    "options": [
+      "zā",
+      "cā"
+    ]
+  },
+  {
+    "id": 22,
+    "module": "initial",
+    "subtype": "retroflex z-zh",
+    "audio": "audio/22.mp3",
+    "options": [
+      "zā",
+      "zhā"
+    ]
+  },
+  {
+    "id": 23,
+    "module": "initial",
+    "subtype": "retroflex c-ch",
+    "audio": "audio/23.mp3",
+    "options": [
+      "cā",
+      "chā"
+    ]
+  },
+  {
+    "id": 24,
+    "module": "initial",
+    "subtype": "retroflex s-sh",
+    "audio": "audio/24.mp3",
+    "options": [
+      "sā",
+      "shā"
+    ]
+  },
+  {
+    "id": 25,
+    "module": "final",
+    "subtype": "medial 韵头 ia-a",
+    "audio": "audio/25.mp3",
+    "options": [
+      "jiā",
+      "jā"
+    ]
+  },
+  {
+    "id": 26,
+    "module": "final",
+    "subtype": "medial 韵头 iao-ao",
+    "audio": "audio/26.mp3",
+    "options": [
+      "liáo",
+      "láo"
+    ]
+  },
+  {
+    "id": 27,
+    "module": "final",
+    "subtype": "nucleus 韵腹 a-o",
+    "audio": "audio/27.mp3",
+    "options": [
+      "bā",
+      "bō"
+    ]
+  },
+  {
+    "id": 28,
+    "module": "final",
+    "subtype": "nucleus 韵腹 o-e",
+    "audio": "audio/28.mp3",
+    "options": [
+      "gō",
+      "gē"
+    ]
+  },
+  {
+    "id": 29,
+    "module": "final",
+    "subtype": "coda 韵尾 an-ang",
+    "audio": "audio/29.mp3",
+    "options": [
+      "bāng",
+      "bān"
+    ]
+  },
+  {
+    "id": 30,
+    "module": "final",
+    "subtype": "coda 韵尾 en-eng",
+    "audio": "audio/30.mp3",
+    "options": [
+      "bēn",
+      "bēng"
+    ]
+  },
+  {
+    "id": 31,
+    "module": "final",
+    "subtype": "coda 韵尾 in-ing",
+    "audio": "audio/31.mp3",
+    "options": [
+      "xīn",
+      "xīng"
+    ]
+  },
+  {
+    "id": 32,
+    "module": "final",
+    "subtype": "coda 韵尾 in-ing",
+    "audio": "audio/32.mp3",
+    "options": [
+      "jīn",
+      "jīng"
+    ]
+  }
+];
+let participantId = "KR-" + new Date().toISOString().replace(/[-:.TZ]/g,"").slice(0,14) + "-" + Math.floor(Math.random()*1000);
+let current = 0, testStart = null, questionStart = null, testEnd = null;
+let playCounts = {}, answers = {}, logs = [], dataRows = [];
+function showPage(id){document.querySelectorAll("section").forEach(s=>s.classList.add("hidden"));document.getElementById(id).classList.remove("hidden");window.scrollTo(0,0);}
+function startConsent(){if(!document.getElementById("agree").checked){alert("请先勾选知情同意。");return;}showPage("page-bg");}
+function getBg(){return {participant_id:participantId,gender:gender.value,age:age.value,study_time:study_time.value,hsk:hsk.value,visited_china:visited_china.value,stay_china:stay_china.value,teacher:teacher.value,training:training.value,weekly_use:weekly_use.value};}
+function goPractice(){showPage("page-practice");}
+function playPractice(){practiceAudio.play();}
+function beginTest(){testStart=Date.now();current=0;showPage("page-test");renderQuestion();}
+function renderQuestion(){const q=QUESTIONS[current];questionStart=Date.now();if(!(q.id in playCounts))playCounts[q.id]=0;progressText.innerText=(current+1)+" / "+QUESTIONS.length;bar.style.width=((current+1)/QUESTIONS.length*100)+"%";questionTitle.innerText="第 "+q.id+" 题";mainAudio.src=q.audio;playInfo.innerText="播放次数："+playCounts[q.id];warn.innerText="";optionsBox.innerHTML="";q.options.forEach(opt=>{const checked=answers[q.id]===opt?"checked":"";optionsBox.innerHTML+=`<label class="choice"><input type="radio" name="answer" value="${opt}" ${checked}> ${opt}</label>`;});document.querySelectorAll("input[name='answer']").forEach(r=>r.addEventListener("change",e=>{answers[q.id]=e.target.value;}));}
+function playCurrent(){const q=QUESTIONS[current];playCounts[q.id]=(playCounts[q.id]||0)+1;playInfo.innerText="播放次数："+playCounts[q.id];mainAudio.currentTime=0;mainAudio.play();}
+function saveCurrentLog(){const q=QUESTIONS[current];const rt=((Date.now()-questionStart)/1000).toFixed(2);logs[current]={participant_id:participantId,question_id:q.id,module:q.module,subtype:q.subtype,audio:q.audio,option_A:q.options[0],option_B:q.options[1],answer:answers[q.id]||"",play_count:playCounts[q.id]||0,response_time_sec:rt};}
+function nextQuestion(){const q=QUESTIONS[current];if(!answers[q.id]){warn.innerText="请选择一个答案后再进入下一题。";return;}if((playCounts[q.id]||0)===0){warn.innerText="请至少播放一次音频后再进入下一题。";return;}saveCurrentLog();if(current<QUESTIONS.length-1){current++;renderQuestion();}else{showPage("page-survey");}}
+function prevQuestion(){if(current>0){saveCurrentLog();current--;renderQuestion();}}
+function getRadio(name){const r=document.querySelector(`input[name="${name}"]:checked`);return r?r.value:"";}
+function finish(){testEnd = Date.now(); const totalDuration=((testEnd-testStart)/1000).toFixed(2);const bg=getBg();const survey={overall:getRadio("overall"),hardest:getRadio("hardest"),guess:getRadio("guess"),clarity:getRadio("clarity"),interview:getRadio("interview"),contact:contact.value,test_date:new Date().toISOString().slice(0,10),start_time:new Date(testStart).toISOString(),end_time:new Date(testEnd).toISOString(),total_duration_sec:totalDuration};dataRows=logs.map(row=>({...bg,...survey,...row}));preview.textContent=JSON.stringify(dataRows.slice(0,3),null,2);showPage("page-finish");}
+function csvEscape(v){if(v===null||v===undefined)return "";const s=String(v).replace(/"/g,'""');return /[",\n]/.test(s)?`"${s}"`:s;}
+function downloadCSV(){if(!dataRows.length)return;const headers=Object.keys(dataRows[0]);const csv=[headers.join(",")].concat(dataRows.map(r=>headers.map(h=>csvEscape(r[h])).join(","))).join("\n");const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=participantId+"_CMAPT_KR_Pilot_v1.0_Final.csv";a.click();URL.revokeObjectURL(a.href);}
+</script>
+</body>
+</html>
