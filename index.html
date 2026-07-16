@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CMAPT-KR Pilot v1.0 Final</title>
+<title>CMAPT-KR Pilot v1.0.1</title>
 <style>
 :root{--blue:#174ea6;--blue2:#0b3b86;--bg:#eef3f9;--text:#1f2937;--muted:#64748b;--line:#d9e2ef;--card:#fff;--danger:#b91c1c}
 *{box-sizing:border-box}
@@ -62,7 +62,7 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid var(--line);bo
 <label>是否来过中国 / 중국 방문 경험<select id="visited_china"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
 <label>累计在中国停留时间 / 중국 총 체류 기간<select id="stay_china"><option value="">请选择 / 선택하세요</option><option>少于1个月 / 1개월 미만</option><option>1–6个月 / 1–6개월</option><option>6–12个月 / 6–12개월</option><option>1–2年 / 1–2년</option><option>2–4年 / 2–4년</option><option>4年以上 / 4년 이상</option><option>未去过中国 / 중국 방문 경험 없음</option></select></label>
 <label>汉语教师主要是哪国人？ / 중국어 선생님<select id="teacher"><option value="">请选择 / 선택하세요</option><option>中国人 / 중국인</option><option>韩国人 / 한국인</option><option>两者都有 / 둘 다 있음</option></select></label>
-<label>是否接受过声调和拼音训练？ / 발음 교육 경험<select id="training"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
+<label>是否接受过声调（例如：mā、má、mǎ、mà）和拼音训练？ / 발음 교육 경험<select id="training"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
 <label>平均每周使用汉语时间 / 주당 중국어 사용 시간<select id="weekly_use"><option value="">请选择 / 선택하세요</option><option>少于5小时 / 5시간 미만</option><option>5–10小时 / 5–10시간</option><option>10–20小时 / 10–20시간</option><option>20小时以上 / 20시간 이상</option></select></label>
 </div>
 <div class="btn-row"><button class="secondary" onclick="showPage('page-consent')">返回</button><button onclick="goPractice()">下一步</button></div>
@@ -102,9 +102,9 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid var(--line);bo
 <label class="choice"><input type="radio" name="overall" value="7">7 非常容易 / 매우 쉽다</label>
 
 <p><b>2. 您觉得最难区分的是？</b><br><small>가장 구별하기 어려웠던 것은 무엇인가요?</small></p>
-<label class="choice"><input type="radio" name="hardest" value="tone">声调 / 성조</label>
-<label class="choice"><input type="radio" name="hardest" value="initial">声母 / 성모</label>
-<label class="choice"><input type="radio" name="hardest" value="final">韵母 / 운모</label>
+<label class="choice"><input type="radio" name="hardest" value="tone">声调 / 성조 (예: mā, má, mǎ, mà)</label>
+<label class="choice"><input type="radio" name="hardest" value="initial">声母（例如：b、p、m、f） / 성모 (예: b, p, m, f)</label>
+<label class="choice"><input type="radio" name="hardest" value="final">韵母（例如：a、o、e、ai、ao） / 운모 (예: a, o, e, ai, ao)</label>
 <p><b>3. 您做题时是否依靠猜测？</b><br><small>문제를 풀 때 추측에 의존하셨나요?</small></p>
 <label class="choice"><input type="radio" name="guess" value="never">从不 / 전혀 그렇지 않았다</label>
 <label class="choice"><input type="radio" name="guess" value="sometimes">偶尔 / 가끔</label>
