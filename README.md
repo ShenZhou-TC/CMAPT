@@ -1,8 +1,22 @@
 # CMAPT-KR Online v1.1
 
-Chinese Mandarin Auditory Perception Test (CMAPT)
+**Chinese Mandarin Auditory Perception Test (CMAPT)**
 
 An online experimental platform for Mandarin auditory perception research in International Chinese Language Education.
+
+---
+
+## 🌐 Online Experiment
+
+https://shenzhou-tc.github.io/CMAPT/
+
+---
+
+## Current Status
+
+🟢 Formal Data Collection
+
+Automatic submission to Google Sheets enabled.
 
 ---
 
