@@ -1,95 +1,51 @@
-# CMAPT-KR Online v1.1
+# CMAPT-KR Online v1.2
 
-**Chinese Mandarin Auditory Perception Test (CMAPT)**
+## Korean Learners' Mandarin Phonetic Discrimination Test System
 
-An online experimental platform for Mandarin auditory perception research in International Chinese Language Education.
+CMAPT-KR is an online experimental platform designed to investigate Korean learners' perception of Mandarin phonetic contrasts.
 
----
+## Version
 
-## 🌐 Online Experiment
-
-https://shenzhou-tc.github.io/CMAPT/
-
----
-
-## Current Status
-
-🟢 Formal Data Collection
-
-Automatic submission to Google Sheets enabled.
-
----
-
-## Current Version
-
-**CMAPT-KR Online v1.1**
-
-Status:
-
-🟢 Online Data Collection
-
----
+**Current Version:** Online v1.2  
+**Status:** Formal Data Collection
 
 ## Main Features
 
-- Chinese–Korean bilingual interface
-- Informed consent
-- Background questionnaire
-- Practice trial
-- Formal auditory perception test (Q11–Q32)
-- Test feedback questionnaire
-- Audio play count recording
+- Chinese-Korean bilingual interface
+- Online listening discrimination test
+- Automatic audio playback recording
 - Response time recording
-- Automatic submission to Google Sheets
-- GitHub Pages deployment
+- Audio play count recording
+- Automatic answer checking
+- Accuracy calculation
+- Participant-level summary statistics
 
----
+## Experimental Design
 
-## Usage
+The test consists of:
 
-Participants only need to open:
+1. Background information questionnaire
+2. Mandarin phonetic discrimination test (Q11-Q32)
+3. Self-evaluation questionnaire
 
-https://shenzhou-tc.github.io/CMAPT/
+The phonetic discrimination test includes:
 
-No installation is required.
+- Tone perception
+- Initial consonant perception
+- Final perception
 
-All data will be automatically submitted to the research database after the experiment.
+## Data Processing
 
----
+The system automatically records:
 
-## Current Project
+- Participant information
+- Trial-level responses
+- Response time
+- Audio play count
+- Accuracy
 
-CMAPT-KR
+Data are stored and summarized through Google Sheets.
 
-Target participants:
+## Status
 
-Korean learners of Chinese
-
-Current stage:
-
-Formal data collection
-
----
-
-## Future Development
-
-- Japanese Version (CMAPT-JP)
-- Thai Version (CMAPT-TH)
-- Vietnamese Version (CMAPT-VN)
-- Multi-language support
-- Automatic statistical analysis
-- Research dashboard
-
----
-
-## Developer
-
-ShenZhou-TC
-
-PhD Candidate
-
-International Chinese Language Education
-
-GitHub:
-
-https://github.com/ShenZhou-TC/CMAPT
+Ready for formal data collection with Korean learners.
