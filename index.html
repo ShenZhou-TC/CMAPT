@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CMAPT-KR Pilot v1.0.1</title>
+<title>CMAPT-KR Online v1.1</title>
 <style>
 :root{--blue:#174ea6;--blue2:#0b3b86;--bg:#eef3f9;--text:#1f2937;--muted:#64748b;--line:#d9e2ef;--card:#fff;--danger:#b91c1c}
 *{box-sizing:border-box}
@@ -49,7 +49,7 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid var(--line);bo
 <div class="notice">欢迎参加本研究。本研究旨在了解韩国汉语学习者的汉语语音听辨情况。本问卷仅用于学术研究，所有数据匿名处理。请在安静环境下佩戴耳机完成测试，测试时间约 8—10 分钟。<br><br>본 연구는 한국인 중국어 학습자의 중국어 음성 변별 능력을 알아보기 위한 연구입니다. 수집된 자료는 학술 연구 목적으로만 사용되며, 모든 응답은 익명으로 처리됩니다. 정확한 결과를 위해 조용한 환경에서 이어폰 또는 헤드폰을 착용한 후 테스트를 진행해 주시기 바랍니다.</div>
 <label><input type="checkbox" id="agree"> 我已阅读并同意参加本研究。 / 연구 참여에 동의합니다.</label>
 <div class="center"><button onclick="startConsent()">开始测试 / 시작하기</button></div>
-<div class="footer-note">CMAPT-KR Pilot v1.0 Final · Pilot Version</div>
+<div class="footer-note">CMAPT-KR Online v1.1 · Pilot Version</div>
 </section>
 
 <section id="page-bg" class="hidden">
@@ -62,32 +62,32 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid var(--line);bo
 <label>是否来过中国 / 중국 방문 경험<select id="visited_china"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
 <label>累计在中国停留时间 / 중국 총 체류 기간<select id="stay_china"><option value="">请选择 / 선택하세요</option><option>少于1个月 / 1개월 미만</option><option>1–6个月 / 1–6개월</option><option>6–12个月 / 6–12개월</option><option>1–2年 / 1–2년</option><option>2–4年 / 2–4년</option><option>4年以上 / 4년 이상</option><option>未去过中国 / 중국 방문 경험 없음</option></select></label>
 <label>汉语教师主要是哪国人？ / 중국어 선생님<select id="teacher"><option value="">请选择 / 선택하세요</option><option>中国人 / 중국인</option><option>韩国人 / 한국인</option><option>两者都有 / 둘 다 있음</option></select></label>
-<label>是否接受过声调（例如：mā、má、mǎ、mà）和拼音训练？ / 발음 교육 경험<select id="training"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
+<label>是否接受过声调和拼音训练？ / 발음 교육 경험<select id="training"><option value="">请选择 / 선택하세요</option><option>是 / 네</option><option>否 / 아니요</option></select></label>
 <label>平均每周使用汉语时间 / 주당 중국어 사용 시간<select id="weekly_use"><option value="">请选择 / 선택하세요</option><option>少于5小时 / 5시간 미만</option><option>5–10小时 / 5–10시간</option><option>10–20小时 / 10–20시간</option><option>20小时以上 / 20시간 이상</option></select></label>
 </div>
-<div class="btn-row"><button class="secondary" onclick="showPage('page-consent')">返回</button><button onclick="goPractice()">下一步</button></div>
+<div class="btn-row"><button class="secondary" onclick="showPage('page-consent')">返回 / 이전</button><button onclick="goPractice()">下一步 / 다음</button></div>
 </section>
 
 <section id="page-practice" class="hidden">
 <div class="section-head"><h2>声音测试<br><small>음성 테스트</small></h2><span class="badge">Step 2 / 4</span></div>
 <p class="prompt">请先播放测试音频，确认可以正常听见。<br><small>테스트 음성을 재생하여 소리가 잘 들리는지 확인해 주세요.</small></p>
-<button class="audio-btn" onclick="playPractice()">▶ 播放试听 / 재생</button>
+<button class="audio-btn" onclick="playPractice()">▶ 播放试听 / 듣기</button>
 <audio id="practiceAudio" src="audio/10.mp3"></audio>
 <p class="small center">试听音频文件名：audio/10.mp3</p>
-<div class="btn-row"><button class="secondary" onclick="showPage('page-bg')">返回</button><button onclick="beginTest()">进入正式测试</button></div>
+<div class="btn-row"><button class="secondary" onclick="showPage('page-bg')">返回 / 이전</button><button onclick="beginTest()">进入正式测试 / 정식 테스트 시작</button></div>
 </section>
 
 <section id="page-test" class="hidden">
 <div class="section-head"><h2>第二部分：听辨测试<br><small>음성 변별 테스트</small></h2><span class="badge" id="progressText"></span></div>
 <div class="progressbar"><div id="bar"></div></div>
 <h2 id="questionTitle" class="center"></h2>
-<button class="audio-btn" id="playBtn" onclick="playCurrent()">▶ 播放音频</button>
+<button class="audio-btn" id="playBtn" onclick="playCurrent()">▶ 播放音频 / 듣기</button>
 <audio id="mainAudio"></audio>
 <div class="center small" id="playInfo">播放次数：0</div>
 <div class="prompt">请选择您听到的拼音。<br><small>음성을 듣고 맞는 병음을 선택하십시오.</small></div>
 <div id="optionsBox"></div>
 <div id="warn" class="warn"></div>
-<div class="btn-row"><button class="secondary" onclick="prevQuestion()">上一题</button><button onclick="nextQuestion()">下一题</button></div>
+<div class="btn-row"><button class="secondary" onclick="prevQuestion()">◀ 上一题 / 이전 문항</button><button onclick="nextQuestion()">下一题 / 다음 문항 ▶</button></div>
 </section>
 
 <section id="page-survey" class="hidden">
@@ -102,9 +102,9 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid var(--line);bo
 <label class="choice"><input type="radio" name="overall" value="7">7 非常容易 / 매우 쉽다</label>
 
 <p><b>2. 您觉得最难区分的是？</b><br><small>가장 구별하기 어려웠던 것은 무엇인가요?</small></p>
-<label class="choice"><input type="radio" name="hardest" value="tone">声调 / 성조 (예: mā, má, mǎ, mà)</label>
-<label class="choice"><input type="radio" name="hardest" value="initial">声母（例如：b、p、m、f） / 성모 (예: b, p, m, f)</label>
-<label class="choice"><input type="radio" name="hardest" value="final">韵母（例如：a、o、e、ai、ao） / 운모 (예: a, o, e, ai, ao)</label>
+<label class="choice"><input type="radio" name="hardest" value="tone">声调 / 성조</label>
+<label class="choice"><input type="radio" name="hardest" value="initial">声母 / 성모</label>
+<label class="choice"><input type="radio" name="hardest" value="final">韵母 / 운모</label>
 <p><b>3. 您做题时是否依靠猜测？</b><br><small>문제를 풀 때 추측에 의존하셨나요?</small></p>
 <label class="choice"><input type="radio" name="guess" value="never">从不 / 전혀 그렇지 않았다</label>
 <label class="choice"><input type="radio" name="guess" value="sometimes">偶尔 / 가끔</label>
@@ -119,21 +119,26 @@ textarea{width:100%;min-height:92px;padding:12px;border:1px solid var(--line);bo
 <label class="choice"><input type="radio" name="interview" value="yes">是 / 네</label>
 <label class="choice"><input type="radio" name="interview" value="no">否 / 아니요</label>
 <label>联系方式与方便访谈时间 / 연락처 및 가능한 시간<textarea id="contact" placeholder="KakaoTalk / WeChat / Instagram / Email"></textarea></label>
-<div class="btn-row"><button class="secondary" onclick="showPage('page-test')">返回</button><button onclick="finish()">提交</button></div>
+<div class="btn-row"><button class="secondary" onclick="showPage('page-test')">返回 / 이전</button><button onclick="finish()">提交 / 제출</button></div>
 </section>
 
 <section id="page-finish" class="hidden">
 <h2 class="center">感谢您的参与！<br><small>참여해 주셔서 감사합니다.</small></h2>
-<p class="center">您已完成全部测试。请点击下面按钮下载测试数据（CSV），并将 CSV 文件发送给研究者。</p>
-<p class="center"><small>테스트가 완료되었습니다. 아래 버튼을 눌러 CSV 파일을 다운로드한 후 연구자에게 보내주시기 바랍니다.</small></p>
-<div class="center"><button onclick="downloadCSV()">下载测试数据 CSV</button></div>
-<p class="small center">CMAPT-KR Pilot v1.0 Final · Stable Pilot Version</p>
-<h3>数据预览</h3>
-<pre class="result-box" id="preview"></pre>
+<p class="center" id="submitStatus">正在提交数据，请稍候……<br><small>데이터를 제출하는 중입니다. 잠시만 기다려 주세요.</small></p>
+<div class="center">
+  <button id="retryBtn" class="hidden" onclick="submitToGoogleSheets()">重新提交 / 다시 제출</button>
+</div>
+<p class="small center">CMAPT-KR Online v1.1</p>
 </section>
 
 </main></div>
 <script>
+
+// Google Apps Script Web App URL.
+// 部署 Apps Script 后，把下面地址替换为你的 /exec 地址。
+const GOOGLE_SHEETS_WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbxjPN5O5c_fgwXA0I9qP9Nn-bdbfNCfCxzRXqTkBH3qjlScK3b4RJqU1TfbCWYPixeGQg/exec";
+
 const QUESTIONS = [
   {
     "id": 11,
@@ -373,7 +378,8 @@ function prevQuestion(){if(current>0){saveCurrentLog();current--;renderQuestion(
 function getRadio(name){const r=document.querySelector(`input[name="${name}"]:checked`);return r?r.value:"";}
 function finish(){testEnd = Date.now(); const totalDuration=((testEnd-testStart)/1000).toFixed(2);const bg=getBg();const survey={overall:getRadio("overall"),hardest:getRadio("hardest"),guess:getRadio("guess"),clarity:getRadio("clarity"),interview:getRadio("interview"),contact:contact.value,test_date:new Date().toISOString().slice(0,10),start_time:new Date(testStart).toISOString(),end_time:new Date(testEnd).toISOString(),total_duration_sec:totalDuration};dataRows=logs.map(row=>({...bg,...survey,...row}));preview.textContent=JSON.stringify(dataRows.slice(0,3),null,2);showPage("page-finish");}
 function csvEscape(v){if(v===null||v===undefined)return "";const s=String(v).replace(/"/g,'""');return /[",\n]/.test(s)?`"${s}"`:s;}
-function downloadCSV(){if(!dataRows.length)return;const headers=Object.keys(dataRows[0]);const csv=[headers.join(",")].concat(dataRows.map(r=>headers.map(h=>csvEscape(r[h])).join(","))).join("\n");const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8;"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=participantId+"_CMAPT_KR_Pilot_v1.0_Final.csv";a.click();URL.revokeObjectURL(a.href);}
+
+
 </script>
 </body>
 </html>
