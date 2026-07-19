@@ -1,23 +1,81 @@
-# CMAPT-KR Pilot v1.0 Final
+# CMAPT-KR Online v1.1
 
-Chinese Mandarin Auditory Perception Test - Korean Pilot Version
+Chinese Mandarin Auditory Perception Test (CMAPT)
 
-## 使用方法
-1. 解压文件。
-2. 将 10.mp3 至 32.mp3 放入 `audio/` 文件夹。
-3. 双击 `index.html` 即可本地运行。
-4. 完成测试后下载 CSV 数据，并发送给研究者。
+An online experimental platform for Mandarin auditory perception research in International Chinese Language Education.
 
-## Final 功能
-- 中韩双语知情同意
-- 背景调查
-- 第10题试听
-- 第11-32题正式听辨
-- 播放次数记录
-- 每题作答时间记录
-- 测试反馈
-- 7级Likert量表
-- CSV导出
+---
 
-## 注意
-Pilot v1.0 Final 为3人预测试稳定版本。除严重影响实验进行的问题外，不再修改。
+## Current Version
+
+**CMAPT-KR Online v1.1**
+
+Status:
+
+🟢 Online Data Collection
+
+---
+
+## Main Features
+
+- Chinese–Korean bilingual interface
+- Informed consent
+- Background questionnaire
+- Practice trial
+- Formal auditory perception test (Q11–Q32)
+- Test feedback questionnaire
+- Audio play count recording
+- Response time recording
+- Automatic submission to Google Sheets
+- GitHub Pages deployment
+
+---
+
+## Usage
+
+Participants only need to open:
+
+https://shenzhou-tc.github.io/CMAPT/
+
+No installation is required.
+
+All data will be automatically submitted to the research database after the experiment.
+
+---
+
+## Current Project
+
+CMAPT-KR
+
+Target participants:
+
+Korean learners of Chinese
+
+Current stage:
+
+Formal data collection
+
+---
+
+## Future Development
+
+- Japanese Version (CMAPT-JP)
+- Thai Version (CMAPT-TH)
+- Vietnamese Version (CMAPT-VN)
+- Multi-language support
+- Automatic statistical analysis
+- Research dashboard
+
+---
+
+## Developer
+
+ShenZhou-TC
+
+PhD Candidate
+
+International Chinese Language Education
+
+GitHub:
+
+https://github.com/ShenZhou-TC/CMAPT
